@@ -18,7 +18,7 @@ This will produce a `.wasm` module and a wrapper `.js` file (as well as a demo `
 
 ### Docker Environment
 
-If you don't have or do not want to set up emscripen locally, you can use the supplied [Dockerfile](/Dockerfile) which installs all 
+If you don't have or do not want to set up emscripten locally, you can use the supplied [Dockerfile](/Dockerfile) which installs all 
 dependencies needed to create the WASM artifacts: 
 
 ```shell
