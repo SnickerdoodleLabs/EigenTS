@@ -15,3 +15,15 @@ emcc src/eigen/eigen.cpp -o wasm/eigen.html -I ./Eigen -sEXPORTED_FUNCTIONS=_flo
 ```
 
 This will produce a `.wasm` module and a wrapper `.js` file (as well as a demo `.html` page) in the `/wasm` directory.
+
+### Docker Environment
+
+If you don't have or do not want to set up emscripen locally, you can use the supplied [Dockerfile](/Dockerfile) which installs all 
+dependencies needed to create the WASM artifacts: 
+
+```shell
+docker build -t emcc .
+docker run -it --rm --entrypoint bash -v /path/to/EigenTS:/root/EigenTS emcc
+cd /root/EigenTS
+# run emscripten from the mounted repository to build eigen.cpp
+```
