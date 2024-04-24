@@ -1,4 +1,5 @@
 #include <math.h>
+#include <emscripten.h>
 #include <Eigen/Core>
 #include <Eigen/Dense>
 #include <cassert>
@@ -6,18 +7,21 @@
 
 extern "C"
 {
+    EMSCRIPTEN_KEEPALIVE
     float float_norm(int rows, int cols, float* _A)
     {
         Eigen::Map<Eigen::MatrixXf> A(_A, rows, cols);
         return A.norm();
     }
 
+    EMSCRIPTEN_KEEPALIVE
     void float_random_matrix(int rows, int cols, float* _A)
     {
         Eigen::Map<Eigen::MatrixXf> A(_A, rows, cols);
         A.setRandom();
     }
 
+    EMSCRIPTEN_KEEPALIVE
     void float_matrix_matrix_mult(int rowsA, int colsA, float* _A, int rowsB, int colsB, float* _B, float* _C)
     {
         assert(colsA == rowsB);
@@ -28,6 +32,8 @@ extern "C"
         C = A*B;
     }
 
+
+    EMSCRIPTEN_KEEPALIVE
     void float_system_solve(int rows, int cols, float* _A, float* _b, float* _x)
     {
         Eigen::Map<Eigen::MatrixXf> A(_A, rows, cols);
@@ -36,6 +42,7 @@ extern "C"
         x = A.template jacobiSvd<Eigen::ComputeThinU | Eigen::ComputeThinV>().solve(b);
     }
 
+    EMSCRIPTEN_KEEPALIVE
     void float_matrix_matrix_add(float alpha, float beta, int rows, int cols, float* _A, float* _B, float* _C)
     {
         Eigen::Map<Eigen::MatrixXf> A(_A, rows, cols);

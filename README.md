@@ -23,7 +23,12 @@ dependencies needed to create the WASM artifacts:
 
 ```shell
 docker build -t emcc .
-docker run -it --rm --entrypoint bash -v /path/to/EigenTS:/root/EigenTS emcc
+docker run -it --rm --entrypoint bash -v $(pwd)/EigenTS:/root/EigenTS emcc
 cd /root/EigenTS
 # run emscripten from the mounted repository to build eigen.cpp
+```
+
+
+```shell
+emcc src/eigen/eigen.cpp -o wasm/eigen_mod.js -I ./Eigen -sMODULARIZE -sEXPORTED_RUNTIME_METHODS=ccall,cwrap
 ```
